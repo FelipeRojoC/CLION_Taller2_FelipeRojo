@@ -7,4 +7,5 @@ add_executable(Taller2_P3 main.cpp
         Pedido.cpp
         Pedido.h
         MinHeap.h
+        MinHeap.cpp
 )
