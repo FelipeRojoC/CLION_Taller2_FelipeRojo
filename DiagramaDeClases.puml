@@ -10,9 +10,16 @@ class Pedido{
     - horaPedido: String
     - enPreparacion: boolean
     - completado: boolean
-
     + Pedido()
     + Pedido(id: int, nombreCliente: String, apellidoCliente: String, productos: List<String>, horaPedido: String, enPreparacion: boolean, completado: boolean)
+}
+
+class MinHeap{
+    - pedido: Pedido
+    - prioridad: int
+    + MinHeap()
+    + extraerMin(): Pedido
+    + estaVacio(): boolean
 }
 
 @enduml
