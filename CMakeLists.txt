@@ -5,4 +5,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(Taller2_P3 main.cpp
         Pedido.cpp
-        Pedido.h)
+        Pedido.h
+        MinHeap.h
+)

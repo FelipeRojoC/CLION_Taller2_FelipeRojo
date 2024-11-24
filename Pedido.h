@@ -10,6 +10,7 @@
 
 class Pedido {
 private:
+    //Atributos
     int id;
     std::string nombreCliente;
     std::string apellidoCliente;
