@@ -1,8 +1,6 @@
 # ninja log v6
 5	659	7541741701479248	CMakeFiles/Taller2_P3.dir/main.cpp.obj	9989de1ad3016a7e
+14	838	7541918963956090	CMakeFiles/Taller2_P3.dir/MinHeap.cpp.obj	8dba6e2b164e928e
 13	364	7541756897444631	CMakeFiles/Taller2_P3.dir/Pedido.cpp.obj	ee816b98707f80a0
 364	467	7541756900949133	Taller2_P3.exe	2fab361e014b54d2
-10	309	7541902410134529	build.ninja	678c35f2cbaa4b8a
-13	761	7541902465343507	CMakeFiles/Taller2_P3.dir/MinHeap.cpp.obj	8dba6e2b164e928e
-14	980	7541905834105468	CMakeFiles/Taller2_P3.dir/MinHeap.cpp.obj	8dba6e2b164e928e
-12	861	7541908275124504	CMakeFiles/Taller2_P3.dir/MinHeap.cpp.obj	8dba6e2b164e928e
+10	309	7541919346878439	build.ninja	678c35f2cbaa4b8a

@@ -7,7 +7,6 @@
 
 #include "Pedido.h"
 #include <queue>
-#include <iostream>
 
 class MinHeap {
 private:
@@ -15,20 +14,21 @@ private:
         Pedido pedido;
         int prioridad;
 
-        NodoHeap(const Pedido& pedido, int prioridad) : pedido(pedido), prioridad(prioridad) {}
+        NodoHeap(Pedido pedido, int prioridad)
+            : pedido(std::move(pedido)), prioridad(prioridad) {}
     };
 
     std::queue<NodoHeap> heap;
 
-    //Funcion para reorganizar los elementos en forma de MinHeap
+    // Funcion para reorganizar los elementos en forma de MinHeap
     void reorganizar();
 
 public:
-    MinHeap(); //Constructor vacio
+    MinHeap() = default;
 
-    void insertarPedido(const Pedido& pedido, int prioridad);
-    Pedido extraerMin();
-    bool estaVacio() const;
+    void insertarPedido(Pedido pedido, int prioridad);
+    [[nodiscard]] Pedido extraerMin(); //nodiscard indica que el valor devuelto no debe ignorarse
+    [[nodiscard]] bool estaVacio() const;
 };
 
 #endif // MINHEAP_H
