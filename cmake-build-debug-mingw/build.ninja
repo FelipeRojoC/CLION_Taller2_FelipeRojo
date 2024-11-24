@@ -67,6 +67,18 @@ build CMakeFiles/Taller2_P3.dir/MinHeap.cpp.obj: CXX_COMPILER__Taller2_P3_unscan
   OBJECT_DIR = CMakeFiles\Taller2_P3.dir
   OBJECT_FILE_DIR = CMakeFiles\Taller2_P3.dir
 
+build CMakeFiles/Taller2_P3.dir/AVL.cpp.obj: CXX_COMPILER__Taller2_P3_unscanned_Debug C$:/Users/felip/OneDrive/Escritorio/Estructura$ de$ Datos/Taller2/Taller2_P3/AVL.cpp || cmake_object_order_depends_target_Taller2_P3
+  DEP_FILE = CMakeFiles\Taller2_P3.dir\AVL.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Taller2_P3.dir
+  OBJECT_FILE_DIR = CMakeFiles\Taller2_P3.dir
+
+build CMakeFiles/Taller2_P3.dir/SistemaPedido.cpp.obj: CXX_COMPILER__Taller2_P3_unscanned_Debug C$:/Users/felip/OneDrive/Escritorio/Estructura$ de$ Datos/Taller2/Taller2_P3/SistemaPedido.cpp || cmake_object_order_depends_target_Taller2_P3
+  DEP_FILE = CMakeFiles\Taller2_P3.dir\SistemaPedido.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Taller2_P3.dir
+  OBJECT_FILE_DIR = CMakeFiles\Taller2_P3.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Taller2_P3
@@ -75,7 +87,7 @@ build CMakeFiles/Taller2_P3.dir/MinHeap.cpp.obj: CXX_COMPILER__Taller2_P3_unscan
 #############################################
 # Link the executable Taller2_P3.exe
 
-build Taller2_P3.exe: CXX_EXECUTABLE_LINKER__Taller2_P3_Debug CMakeFiles/Taller2_P3.dir/main.cpp.obj CMakeFiles/Taller2_P3.dir/Pedido.cpp.obj CMakeFiles/Taller2_P3.dir/MinHeap.cpp.obj
+build Taller2_P3.exe: CXX_EXECUTABLE_LINKER__Taller2_P3_Debug CMakeFiles/Taller2_P3.dir/main.cpp.obj CMakeFiles/Taller2_P3.dir/Pedido.cpp.obj CMakeFiles/Taller2_P3.dir/MinHeap.cpp.obj CMakeFiles/Taller2_P3.dir/AVL.cpp.obj CMakeFiles/Taller2_P3.dir/SistemaPedido.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Taller2_P3.dir

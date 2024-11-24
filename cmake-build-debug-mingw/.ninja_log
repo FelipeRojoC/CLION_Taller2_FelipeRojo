@@ -3,4 +3,6 @@
 14	838	7541918963956090	CMakeFiles/Taller2_P3.dir/MinHeap.cpp.obj	8dba6e2b164e928e
 13	364	7541756897444631	CMakeFiles/Taller2_P3.dir/Pedido.cpp.obj	ee816b98707f80a0
 364	467	7541756900949133	Taller2_P3.exe	2fab361e014b54d2
-10	309	7541919346878439	build.ninja	678c35f2cbaa4b8a
+10	309	7541924802092027	build.ninja	678c35f2cbaa4b8a
+13	67	7541924823357237	CMakeFiles/Taller2_P3.dir/AVL.cpp.obj	fd5267df215ef1a1
+18	68	7541924823406832	CMakeFiles/Taller2_P3.dir/SistemaPedido.cpp.obj	34929225eca2e1ad

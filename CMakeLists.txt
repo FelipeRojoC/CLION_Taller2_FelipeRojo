@@ -8,4 +8,8 @@ add_executable(Taller2_P3 main.cpp
         Pedido.h
         MinHeap.h
         MinHeap.cpp
+        AVL.cpp
+        AVL.h
+        SistemaPedido.cpp
+        SistemaPedido.h
 )
