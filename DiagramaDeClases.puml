@@ -1,0 +1,18 @@
+@startuml
+
+left to right direction
+
+class Pedido{
+    - id: int
+    - nombreCliente: String
+    - apellidoCliente: String
+    - productos: List<String>
+    - horaPedido: String
+    - enPreparacion: boolean
+    - completado: boolean
+
+    + Pedido()
+    + Pedido(id: int, nombreCliente: String, apellidoCliente: String, productos: List<String>, horaPedido: String, enPreparacion: boolean, completado: boolean)
+}
+
+@enduml
