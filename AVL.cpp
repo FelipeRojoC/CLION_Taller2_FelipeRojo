@@ -5,6 +5,7 @@
 #include "AVL.h"
 #include <algorithm>
 #include <iostream>
+#include <stack>
 
 //Constructor
 AVL::AVL() : raiz(nullptr) {}
@@ -15,27 +16,35 @@ AVL::~AVL() {
 }
 
 //Liberar memoria recursivamente
-void AVL::liberar(NodoAVL* nodo) {
-    if (nodo) {
-        liberar(nodo->izquierdo);
-        liberar(nodo->derecho);
-        delete nodo;
+void AVL::liberar(const NodoAVL* nodo) {
+    if (!nodo) return;
+
+    std::stack<const NodoAVL*> pila;
+    pila.push(nodo);
+
+    while (!pila.empty()) {
+        const NodoAVL* actual = pila.top();
+        pila.pop();
+
+        if (actual->izquierdo) pila.push(actual->izquierdo);
+        if (actual->derecho) pila.push(actual->derecho);
+
+        delete actual;
     }
 }
 
 //Altura de un nodo
-int AVL::altura(NodoAVL* nodo) {
+int AVL::altura(const NodoAVL* nodo) {
     return nodo ? nodo->altura : 0;
 }
 
 //Factor de balance
-int AVL::factorBalance(NodoAVL* nodo) {
+int AVL::factorBalance(const NodoAVL* nodo) {
     return nodo ? altura(nodo->izquierdo) - altura(nodo->derecho) : 0;
 }
 
 //Balancear un nodo
 NodoAVL* AVL::balancear(NodoAVL* nodo) {
-    if (!nodo) return nodo;
 
     int balance = factorBalance(nodo);
 
@@ -92,7 +101,6 @@ NodoAVL* AVL::rotacionIzquierda(NodoAVL* x) {
     return y;
 }
 
-//Minimo valor en el Nodo
 NodoAVL* AVL::minimoValorNodo(NodoAVL* nodo) {
     while (nodo && nodo->izquierdo) {
         nodo = nodo->izquierdo;
@@ -100,30 +108,42 @@ NodoAVL* AVL::minimoValorNodo(NodoAVL* nodo) {
     return nodo;
 }
 
-//Insertar en AVL
-NodoAVL* AVL::insertar(NodoAVL* nodo, const Pedido& pedido) {
-    if (!nodo) {
-        return new NodoAVL(pedido);
+NodoAVL* AVL::insertarPedido(NodoAVL* nodo, const Pedido& pedido) {
+    NodoAVL* padre = nullptr;
+    NodoAVL* actual = nodo;
+
+    //Buscar la posicion para insertar el nuevo nodo
+    while (actual) {
+        padre = actual;
+        if (pedido.getId() < actual->pedido.getId()) {
+            actual = actual->izquierdo;
+        } else if (pedido.getId() > actual->pedido.getId()) {
+            actual = actual->derecho;
+        } else {
+            return nodo;
+        }
     }
 
-    if (pedido.getId() < nodo->pedido.getId()) {
-        nodo->izquierdo = insertar(nodo->izquierdo, pedido);
-    } else if (pedido.getId() > nodo->pedido.getId()) {
-        nodo->derecho = insertar(nodo->derecho, pedido);
+    //Crear un nuevo nodo el auto funciona para deducir automaticamente
+    auto nuevo = new NodoAVL(pedido);
+    if (!padre) {
+        return nuevo; // El árbol estaba vacío
+    } else if (pedido.getId() < padre->pedido.getId()) {
+        padre->izquierdo = nuevo;
     } else {
-        //No se puede tener un id repetido
-        return nodo;
+        padre->derecho = nuevo;
     }
 
-    nodo->altura = 1 + std::max(altura(nodo->izquierdo), altura(nodo->derecho));
     return balancear(nodo);
 }
 
+
+
+//Metodos publicos
 void AVL::insertarPedido(const Pedido& pedido) {
-    raiz = insertar(raiz, pedido);
+    raiz = insertarPedido(raiz, pedido);
 }
 
-//Buscar un pedido por su ID
 Pedido AVL::buscarPedido(int id) const {
     NodoAVL* nodo = raiz;
     while (nodo) {
@@ -135,5 +155,50 @@ Pedido AVL::buscarPedido(int id) const {
             return nodo->pedido;
         }
     }
-    return Pedido();
+    return {};
 }
+
+//Eliminar el pedido del AVL
+auto AVL::eliminarPedido(NodoAVL *nodo, int id, bool &encontrado) -> NodoAVL * {
+    NodoAVL* padre = nullptr;
+    NodoAVL* actual = nodo;
+
+    //Buscar el nodo para eliminarlo
+    while (actual && actual->pedido.getId() != id) {
+        padre = actual;
+        if (id < actual->pedido.getId()) {
+            actual = actual->izquierdo;
+        } else {
+            actual = actual->derecho;
+        }
+    }
+
+    //Encontar el nodo
+    if (!actual) {
+        return nodo;
+    }
+    encontrado = true;
+
+    //Eliminar el nodo encontrado
+    if (!actual->izquierdo || !actual->derecho) {
+        NodoAVL* nuevoHijo = actual->izquierdo ? actual->izquierdo : actual->derecho;
+        if (!padre) {
+            delete actual;
+            return nuevoHijo; //Eliminar el padre
+        }
+        if (actual == padre->izquierdo) {
+            padre->izquierdo = nuevoHijo;
+        } else {
+            padre->derecho = nuevoHijo;
+        }
+        delete actual;
+    } else {
+        NodoAVL* sucesor = minimoValorNodo(actual->derecho);
+        actual->pedido = sucesor->pedido;
+        actual->derecho = eliminarPedido(actual->derecho, sucesor->pedido.getId(), encontrado);
+    }
+
+    //Actualizar y balancear
+    return balancear(nodo);
+}
+

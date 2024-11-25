@@ -6,6 +6,7 @@
 #define AVL_H
 
 #include "Pedido.h"
+#include <utility>
 
 struct NodoAVL {
     Pedido pedido;
@@ -13,32 +14,28 @@ struct NodoAVL {
     NodoAVL* derecho;
     int altura;
 
-    NodoAVL(const Pedido& pedido) : pedido(pedido), izquierdo(nullptr), derecho(nullptr), altura(1) {}
+    explicit NodoAVL(Pedido pedido) : pedido(std::move(pedido)), izquierdo(nullptr), derecho(nullptr), altura(1) {}
 };
 
 class AVL {
 private:
     NodoAVL* raiz;
 
-    int altura(NodoAVL* nodo);
-    int factorBalance(NodoAVL* nodo);
-    NodoAVL* rotacionDerecha(NodoAVL* y);
-    NodoAVL* rotacionIzquierda(NodoAVL* x);
-    NodoAVL* balancear(NodoAVL* nodo);
-    NodoAVL* insertar(NodoAVL* nodo, const Pedido& pedido);
-    NodoAVL* eliminar(NodoAVL* nodo, int id, bool& encontrado);
-    NodoAVL* minimoValorNodo(NodoAVL* nodo);
-    Pedido buscar(NodoAVL* nodo, int id) const;
-
-    void liberar(NodoAVL* nodo);
+    static int altura(const NodoAVL* nodo);
+    static int factorBalance(const NodoAVL* nodo);
+    static NodoAVL* rotacionDerecha(NodoAVL* y);
+    static NodoAVL* rotacionIzquierda(NodoAVL* x);
+    static NodoAVL* minimoValorNodo(NodoAVL* nodo);
+    static NodoAVL* balancear(NodoAVL* nodo);
+    static NodoAVL* insertarPedido(NodoAVL* nodo, const Pedido& pedido);
+    static NodoAVL* eliminarPedido(NodoAVL* nodo, int id, bool& encontrado);
+    static void liberar(const NodoAVL* nodo);
 
 public:
     AVL();
     ~AVL();
-
     void insertarPedido(const Pedido& pedido);
-    bool eliminarPedido(int id);
-    Pedido buscarPedido(int id) const;
+    [[nodiscard]] Pedido buscarPedido(int id) const;
 };
 
 #endif // AVL_H
