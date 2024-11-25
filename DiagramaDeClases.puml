@@ -22,4 +22,15 @@ class MinHeap{
     + estaVacio(): boolean
 }
 
+class AVL{
+    - pedido: Pedido
+    - izquierdo: NodoAVL
+    - derecho: NodoAVL
+    - altura: int
+    + AVL()
+    + insertarPedido(pedido: Pedido): void
+    + eliminarPedidoRecursivo(id: int): boolean
+    + buscarPedido(id: int): Pedido
+}
+
 @enduml

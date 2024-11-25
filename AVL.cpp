@@ -202,7 +202,7 @@ NodoAVL AVL::eliminarPedido(NodoAVL *nodo, int id, bool &encontrado) -> NodoAVL 
     return balancear(nodo);
 }
 
-bool AVL::eliminarPedidoIterativo(int id) {
+bool AVL::eliminarPedidoRecursivo(int id) {
     bool encontrado = false;
     raiz = eliminarPedido(raiz, id, encontrado);
     return encontrado;
