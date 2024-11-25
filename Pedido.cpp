@@ -9,10 +9,15 @@
 
 // Constructor de pedido
 Pedido::Pedido(int id, const std::string &nombreCliente, const std::string &apellidoCliente,
-               const std::list<std::string> &productos, const std::string &horaPedido, const&enPreparacion,
-               const&completado)
-    : id(0), nombreCliente(""), apellidoCliente(""), productos(productos),
-      horaPedido(""), enPreparacion(false), completado(false) {}
+               const std::list<std::string> &productos, const std::string &horaPedido,
+               bool enPreparacion, bool completado)
+    : id(id),
+      nombreCliente(nombreCliente),
+      apellidoCliente(apellidoCliente),
+      productos(productos),
+      horaPedido(horaPedido),
+      enPreparacion(enPreparacion),
+      completado(completado) {}
 
 // Getters y setters
 int Pedido::getId() const {
@@ -43,19 +48,19 @@ bool Pedido::isCompletado() const {
     return completado;
 }
 
-void Pedido::setNombreCliente(std::string nombreCliente) {
+void Pedido::setNombreCliente(const std::string &nombreCliente) {
     this->nombreCliente = nombreCliente;
 }
 
-void Pedido::setApellidoCliente(std::string apellidoCliente) {
+void Pedido::setApellidoCliente(const std::string &apellidoCliente) {
     this->apellidoCliente = apellidoCliente;
 }
 
-void Pedido::setProductos(std::list<std::string> productos) {
+void Pedido::setProductos(const std::list<std::string> &productos) {
     this->productos = productos;
 }
 
-void Pedido::setHoraPedido(std::string horaPedido) {
+void Pedido::setHoraPedido(const std::string &horaPedido) {
     this->horaPedido = horaPedido;
 }
 

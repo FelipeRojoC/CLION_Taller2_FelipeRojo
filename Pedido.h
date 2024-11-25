@@ -21,10 +21,14 @@ private:
 
 public:
 
+    //Constructor de pedido default
+    Pedido() : id(0), nombreCliente(""), apellidoCliente(""),
+               horaPedido(""), enPreparacion(false), completado(false) {}
+
     //Constructor de pedido
     Pedido(int id, const std::string &nombreCliente, const std::string &apellidoCliente,
-        const std::list<std::string> &productos, const std::string &horaPedido, bool enPreparacion, bool completado){}
-
+           const std::list<std::string> &productos, const std::string &horaPedido,
+           bool enPreparacion = false, bool completado = false);
 
     //Getters y setters
     int getId() const;
@@ -35,10 +39,10 @@ public:
     bool isEnPreparacion() const;
     bool isCompletado() const;
 
-    void setNombreCliente(std::string nombreCliente);
-    void setApellidoCliente(std::string apellidoCliente);
-    void setProductos(std::list<std::string> productos);
-    void setHoraPedido(std::string horaPedido);
+    void setNombreCliente(const std::string &nombreCliente);
+    void setApellidoCliente(const std::string &apellidoCliente);
+    void setProductos(const std::list<std::string> &productos);
+    void setHoraPedido(const std::string &horaPedido);
     void setEstadoPreparacion(bool estado);
     void setEstadoCompletado(bool estado);
 };
