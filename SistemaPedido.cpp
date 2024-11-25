@@ -41,8 +41,8 @@ void SistemaPedido::entregarPedidos() {
 
 //Cancelar un pedido con su id
 void SistemaPedido::cancelarPedido(int id) {
-    if (avlPedidos.eliminarPedidoRecursivo(id)) {
-        //heapPrioridad.cancelarPedido(id); //TODO hacer el metodo cancelar pedido
+    if (avlPedidos.eliminarPedidoRecursivo(id)) { // AVL
+        heapPrioridad.cancelarPedido(id); // MinHeap
         std::cout << "El pedido ha sido cancelado con ID " << id << "\n";
     } else {
         std::cout << "No se encuentra el pedido con ID " << id << "\n";

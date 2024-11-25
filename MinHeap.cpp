@@ -73,3 +73,32 @@ void MinHeap::reorganizar() {
         heap.push(nodo);
     }
 }
+
+void MinHeap::cancelarPedido(int id) {
+    std::vector<NodoHeap> tempHeap;
+
+    bool encontrado = false;
+
+    //Se recorre todos los nodos del heap
+    while (!heap.empty()) {
+        NodoHeap actual = heap.front();
+        heap.pop();
+
+        if (actual.pedido.getId() != id) {
+            tempHeap.push_back(actual);
+        } else {
+            encontrado = true; //Pedido encontrado y eliminado
+        }
+    }
+
+    //Reconstruimos el heap con los nodos restantes
+    for (const auto& nodo : tempHeap) {
+        heap.push(nodo);
+    }
+
+    if (encontrado) {
+        std::cout << "El pedido con ID " << id << " ha sido eliminado del MinHeap\n";
+    } else {
+        std::cout << "No se encontrO el pedido con ID " << id << " en el MinHeap\n";
+    }
+}

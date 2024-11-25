@@ -20,12 +20,12 @@ private:
 
     std::queue<NodoHeap> heap;
 
-    // Funcion para reorganizar los elementos en forma de MinHeap
+    //Funcion para reorganizar los elementos en forma de MinHeap
     void reorganizar();
 
 public:
     MinHeap() = default;
-
+    void cancelarPedido(int id);
     void insertarPedido(Pedido pedido, int prioridad);
     [[nodiscard]] Pedido extraerMin(); //nodiscard indica que el valor devuelto no debe ignorarse
     [[nodiscard]] bool estaVacio() const;
