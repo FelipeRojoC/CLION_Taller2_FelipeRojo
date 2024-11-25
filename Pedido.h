@@ -24,8 +24,8 @@ public:
     Pedido();
 
     //Constructor de pedido
-    Pedido(int id, std::string nombreCliente, std::string apellidoCliente,
-           std::list<std::string> productos, std::string horaPedido);
+    Pedido(int id, const std::string &nombreCliente, const std::string &apellidoCliente,
+           const std::list<std::string> &productos, const std::string &horaPedido);
 
     //Getters y setters
     int getId() const;
@@ -33,8 +33,8 @@ public:
     const std::string& getApellidoCliente() const;
     const std::list<std::string>& getProductos() const;
     const std::string& getHoraPedido() const;
-    [[nodiscard]] bool isEnPreparacion() const;
-    [[nodiscard]] bool isCompletado() const;
+    bool isEnPreparacion() const;
+    bool isCompletado() const;
 
     void setNombreCliente(std::string nombreCliente);
     void setApellidoCliente(std::string apellidoCliente);

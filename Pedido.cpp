@@ -22,14 +22,7 @@ public:
     //Constructor predeterminado
     Pedido::Pedido() : id(0), nombreCliente(""), apellidoCliente(""), productos(), horaPedido(""), enPreparacion(false), completado(false) {}
 
-    //Constructor de pedido
-    Pedido::Pedido(int id, std::string nombreCliente, std::string apellidoCliente,
-               std::list<std::string> productos, std::string horaPedido)
-    : id(id), nombreCliente(nombreCliente), apellidoCliente(apellidoCliente),
-      productos(productos), horaPedido(horaPedido), enPreparacion(false), completado(false) {}
-
     //Getters y Setters
-
     int Pedido::getId() const {
         return id;
     }
@@ -48,8 +41,10 @@ public:
     const std::string& Pedido::getHoraPedido() const {
         return horaPedido;
     }
-    [[nodiscard]] bool isEnPreparacion() const;
-    [[nodiscard]] bool isCompletado() const;
+
+    //TODO implementar estos metodos
+    bool isEnPreparacion() const;
+    bool isCompletado() const;
 
     void setNombreCliente(std::string nombreCliente);
     void setApellidoCliente(std::string apellidoCliente);
