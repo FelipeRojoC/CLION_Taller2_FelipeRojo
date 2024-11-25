@@ -33,4 +33,9 @@ class AVL{
     + buscarPedido(id: int): Pedido
 }
 
+class SistemaPedido{
+}
+
+class ISistemaPedido{
+}
 @enduml
