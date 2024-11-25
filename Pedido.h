@@ -20,12 +20,11 @@ private:
     bool completado;
 
 public:
-    //Constructor vacio
-    Pedido();
 
     //Constructor de pedido
     Pedido(int id, const std::string &nombreCliente, const std::string &apellidoCliente,
-           const std::list<std::string> &productos, const std::string &horaPedido);
+        const std::list<std::string> &productos, const std::string &horaPedido, bool enPreparacion, bool completado){}
+
 
     //Getters y setters
     int getId() const;

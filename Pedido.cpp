@@ -2,64 +2,67 @@
 // Created by felip on 18-11-2024.
 //
 
-#ifndef PEDIDO_H
-#define PEDIDO_H
+#include "Pedido.h"
 
 #include <string>
 #include <list>
 
-class Pedido {
-private:
-    int id;
-    std::string nombreCliente;
-    std::string apellidoCliente;
-    std::list<std::string> productos;
-    std::string horaPedido;
-    bool enPreparacion;
-    bool completado;
+// Constructor de pedido
+Pedido::Pedido(int id, const std::string &nombreCliente, const std::string &apellidoCliente,
+               const std::list<std::string> &productos, const std::string &horaPedido, const&enPreparacion,
+               const&completado)
+    : id(0), nombreCliente(""), apellidoCliente(""), productos(productos),
+      horaPedido(""), enPreparacion(false), completado(false) {}
 
-public:
-    //Constructor
-    Pedido(int id, const std::string &nombre_cliente, const std::string &apellido_cliente, const std::list<std::string> &productos, const std::string &hora_pedido, bool en_preparacion, bool completado)
-        : id(0),
-          nombreCliente(" "),
-          apellidoCliente(" "),
-          productos(productos),
-          horaPedido(" "),
-          enPreparacion(false),
-          completado(false) {
-    }
+// Getters y setters
+int Pedido::getId() const {
+    return id;
+}
 
-    //Getters y Setters
-    int Pedido::getId() const{
-        return id;
-    }
+const std::string& Pedido::getNombreCliente() const {
+    return nombreCliente;
+}
 
-    const std::string& Pedido::getNombreCliente() const {
-        return nombreCliente;
-    }
+const std::string& Pedido::getApellidoCliente() const {
+    return apellidoCliente;
+}
 
-    const std::string& Pedido::getApellidoCliente() const {
-        return apellidoCliente;
-    }
+const std::list<std::string>& Pedido::getProductos() const {
+    return productos;
+}
 
-    const std::list<std::string>& Pedido::getProductos() const {
-        return productos;
-    }
-    const std::string& Pedido::getHoraPedido() const {
-        return horaPedido;
-    }
+const std::string& Pedido::getHoraPedido() const {
+    return horaPedido;
+}
 
-    //TODO implementar estos metodos
-    bool isEnPreparacion() const;
-    bool isCompletado() const;
+bool Pedido::isEnPreparacion() const {
+    return enPreparacion;
+}
 
-    void setNombreCliente(std::string nombreCliente);
-    void setApellidoCliente(std::string apellidoCliente);
-    void setProductos(std::list<std::string> productos);
-    void setHoraPedido(std::string horaPedido);
-    void setEstadoPreparacion(bool estado);
-    void setEstadoCompletado(bool estado);
-};
+bool Pedido::isCompletado() const {
+    return completado;
+}
 
-#endif // PEDIDO_H
+void Pedido::setNombreCliente(std::string nombreCliente) {
+    this->nombreCliente = nombreCliente;
+}
+
+void Pedido::setApellidoCliente(std::string apellidoCliente) {
+    this->apellidoCliente = apellidoCliente;
+}
+
+void Pedido::setProductos(std::list<std::string> productos) {
+    this->productos = productos;
+}
+
+void Pedido::setHoraPedido(std::string horaPedido) {
+    this->horaPedido = horaPedido;
+}
+
+void Pedido::setEstadoPreparacion(bool estado) {
+    this->enPreparacion = estado;
+}
+
+void Pedido::setEstadoCompletado(bool estado) {
+    this->completado = estado;
+}
