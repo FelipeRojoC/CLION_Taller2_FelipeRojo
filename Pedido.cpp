@@ -19,19 +19,35 @@ private:
     bool completado;
 
 public:
-    //Constructor vacio
-    Pedido();
+    //Constructor predeterminado
+    Pedido::Pedido() : id(0), nombreCliente(""), apellidoCliente(""), productos(), horaPedido(""), enPreparacion(false), completado(false) {}
 
     //Constructor de pedido
-    Pedido(int id, std::string nombreCliente, std::string apellidoCliente,
-           std::list<std::string> productos, std::string horaPedido);
+    Pedido::Pedido(int id, std::string nombreCliente, std::string apellidoCliente,
+               std::list<std::string> productos, std::string horaPedido)
+    : id(id), nombreCliente(nombreCliente), apellidoCliente(apellidoCliente),
+      productos(productos), horaPedido(horaPedido), enPreparacion(false), completado(false) {}
 
     //Getters y Setters
-    [[nodiscard]] int getId() const;
-    [[nodiscard]] const std::string& getNombreCliente() const;
-    [[nodiscard]] const std::string& getApellidoCliente() const;
-    [[nodiscard]] const std::list<std::string>& getProductos() const;
-    [[nodiscard]] const std::string& getHoraPedido() const;
+
+    int Pedido::getId() const {
+        return id;
+    }
+
+    const std::string& Pedido::getNombreCliente() const {
+        return nombreCliente;
+    }
+
+    const std::string& Pedido::getApellidoCliente() const {
+        return apellidoCliente;
+    }
+
+    const std::list<std::string>& Pedido::getProductos() const {
+        return productos;
+    }
+    const std::string& Pedido::getHoraPedido() const {
+        return horaPedido;
+    }
     [[nodiscard]] bool isEnPreparacion() const;
     [[nodiscard]] bool isCompletado() const;
 

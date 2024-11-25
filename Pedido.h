@@ -28,11 +28,11 @@ public:
            std::list<std::string> productos, std::string horaPedido);
 
     //Getters y setters
-    [[nodiscard]] int getId() const;
-    [[nodiscard]] const std::string& getNombreCliente() const;
-    [[nodiscard]] const std::string& getApellidoCliente() const;
-    [[nodiscard]] const std::list<std::string>& getProductos() const;
-    [[nodiscard]] const std::string& getHoraPedido() const;
+    int getId() const;
+    const std::string& getNombreCliente() const;
+    const std::string& getApellidoCliente() const;
+    const std::list<std::string>& getProductos() const;
+    const std::string& getHoraPedido() const;
     [[nodiscard]] bool isEnPreparacion() const;
     [[nodiscard]] bool isCompletado() const;
 
