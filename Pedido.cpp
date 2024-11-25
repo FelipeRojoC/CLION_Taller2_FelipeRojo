@@ -19,11 +19,19 @@ private:
     bool completado;
 
 public:
-    //Constructor predeterminado
-    Pedido::Pedido() : id(0), nombreCliente(""), apellidoCliente(""), productos(), horaPedido(""), enPreparacion(false), completado(false) {}
+    //Constructor
+    Pedido(int id, const std::string &nombre_cliente, const std::string &apellido_cliente, const std::list<std::string> &productos, const std::string &hora_pedido, bool en_preparacion, bool completado)
+        : id(0),
+          nombreCliente(" "),
+          apellidoCliente(" "),
+          productos(productos),
+          horaPedido(" "),
+          enPreparacion(false),
+          completado(false) {
+    }
 
     //Getters y Setters
-    int Pedido::getId() const {
+    int Pedido::getId() const{
         return id;
     }
 
