@@ -159,7 +159,7 @@ Pedido AVL::buscarPedido(int id) const {
 }
 
 //Eliminar el pedido del AVL
-auto AVL::eliminarPedido(NodoAVL *nodo, int id, bool &encontrado) -> NodoAVL * {
+NodoAVL AVL::eliminarPedido(NodoAVL *nodo, int id, bool &encontrado) -> NodoAVL * {
     NodoAVL* padre = nullptr;
     NodoAVL* actual = nodo;
 
@@ -200,5 +200,11 @@ auto AVL::eliminarPedido(NodoAVL *nodo, int id, bool &encontrado) -> NodoAVL * {
 
     //Actualizar y balancear
     return balancear(nodo);
+}
+
+bool AVL::eliminarPedidoIterativo(int id) {
+    bool encontrado = false;
+    raiz = eliminarPedido(raiz, id, encontrado);
+    return encontrado;
 }
 

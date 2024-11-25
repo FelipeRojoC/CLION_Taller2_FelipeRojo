@@ -35,6 +35,7 @@ public:
     AVL();
     ~AVL();
     void insertarPedido(const Pedido& pedido);
+    bool eliminarPedidoIterativo(int id);
     [[nodiscard]] Pedido buscarPedido(int id) const;
 };
 
