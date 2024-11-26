@@ -3,7 +3,6 @@
 //
 
 #include "Pedido.h"
-
 #include <string>
 #include <list>
 
@@ -71,3 +70,4 @@ void Pedido::setEstadoPreparacion(bool estado) {
 void Pedido::setEstadoCompletado(bool estado) {
     this->completado = estado;
 }
+

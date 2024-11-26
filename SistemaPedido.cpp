@@ -102,7 +102,7 @@ void SistemaPedido::mostrarMenu() {
                 std::cin >> cantidad;
                 std::cin.ignore();
                 for (int i = 0; i < cantidad; ++i) {
-                    std::cout << "Producto " << (i + 1) << " ";
+                    std::cout << "Producto " << (i + 1) << "\n";
                     std::getline(std::cin, producto);
                     productos.push_back(producto);
                 }

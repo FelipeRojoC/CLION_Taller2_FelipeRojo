@@ -45,6 +45,8 @@ public:
     void setHoraPedido(const std::string &horaPedido);
     void setEstadoPreparacion(bool estado);
     void setEstadoCompletado(bool estado);
+
+    std::string toString() const;
 };
 
 #endif // PEDIDO_H
