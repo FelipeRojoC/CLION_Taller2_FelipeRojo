@@ -3,7 +3,6 @@
 //
 
 #include "SistemaPedido.h"
-#include <cstdlib>
 #include <ctime>
 #include <iostream>
 #include <ostream>
@@ -71,6 +70,8 @@ void SistemaPedido::cerrarSistema() {
     //TODO Liberar memoria y guardar en archivos
 }
 
+//TODO Falta hacer el menu estadistica
+
 //Menu principal
 void SistemaPedido::mostrarMenu() {
     int opcion;
@@ -84,6 +85,7 @@ void SistemaPedido::mostrarMenu() {
         std::cout << "Seleccione una opcion ";
         std::cin >> opcion;
 
+        //TODO poner un try catch para la opcion y hacer que la opcion se vuelva entero para validar y no se caiga
         switch (opcion) {
             case 1: {
                 std::cin.ignore(); //Limpiar el buffer
