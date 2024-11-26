@@ -81,7 +81,7 @@ void SistemaPedido::mostrarMenu() {
         std::cout << "3 Cancelar Pedido\n";
         std::cout << "4 Buscar Pedido\n";
         std::cout << "5 Salir\n";
-        std::cout << "Seleccione una opción ";
+        std::cout << "Seleccione una opcion ";
         std::cin >> opcion;
 
         switch (opcion) {

@@ -34,8 +34,19 @@ class AVL{
 }
 
 class SistemaPedido{
+    - avlPedidos: AVL
+    - heapPrioridad: MinHeap
+    + SistemaPedido();
+    + crearPedido(nombre, apellido, List<productos): void
+    + entregarPedidos(): void
+    + cancelarPedido(): void
+    + buscarPedido(id: int): void
 }
 
-class ISistemaPedido{
-}
+'Relaciones
+SistemaPedido "1" o-- "1" AVL : administra
+SistemaPedido "1" o-- "1" MinHeap : gestiona
+AVL "1" *-- "n" Pedido : contiene
+MinHeap "1" *-- "n" Pedido : prioriza
+
 @enduml

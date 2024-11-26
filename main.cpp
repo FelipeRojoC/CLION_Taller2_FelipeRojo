@@ -8,6 +8,6 @@ int main() {
     //Mostrar el menu principal
     sistema.mostrarMenu();
 
-    std::cout << "Programa finalizado. ¡Gracias por usar el sistema de pedidos!\n";
+    std::cout << "Programa finalizado \n";
     return 0;
 }
