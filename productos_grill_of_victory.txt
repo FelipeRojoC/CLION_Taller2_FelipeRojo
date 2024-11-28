@@ -1,0 +1,15 @@
+ID,Nombre del Producto,Precio (CLP)
+1,Hamburguesa Clásica,6500
+2,Hamburguesa Doble,7500
+3,Hamburguesa BBQ,8000
+4,Papas Fritas Grandes,3000
+5,Papas Fritas Medianas,1500
+6,Nuggets de Pollo (10 piezas),2000
+7,Ensalada Cesar,5500
+8,Agua Mineral,2000
+9,Gaseosa (350 ml),1500
+10,Gaseosa (500 ml),2500
+11,Batido de Vainilla,2500
+12,Batido de Chocolate,2500
+13,Batido de Fresa,2500
+
