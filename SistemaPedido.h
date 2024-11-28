@@ -9,6 +9,13 @@
 #include <list>
 #include "AVL.h"
 #include "MinHeap.h"
+#include <vector>
+
+struct Producto {
+    int id;
+    std::string nombre;
+    int precio;
+};
 
 class SistemaPedido {
 private:
@@ -18,15 +25,26 @@ private:
 public:
     SistemaPedido();
 
-    void crearPedido(const std::string& nombre, const std::string& apellido, const std::list<std::string>& productos);
+    void crearPedido(const std::string &nombre, const std::string &apellido, const std::list<std::string> &productos, int precioTotal);
     void entregarPedidos();
     void cancelarPedido(int id);
     void buscarPedido(int id) const;
 
-    static void cerrarSistema();
+    void cerrarSistema();
+
+    //Productos cargados desde el archivo productos
+    void cargarProductos(const std::string& nombreArchivo);
+    void mostrarProductos();
+    void mostrarHistorialPedidos() const;
 
     //Menu principal
     void mostrarMenu();
+    static void mostrarEstadisticas();
+private:
+
+    std::vector<Producto> productosDisponibles; // Productos disponibles de la lectura de archivos
+    std::vector<Pedido> historialPedidos; // Historial de pedidos entregados
+
 };
 
 #endif // SISTEMAPEDIDO_H

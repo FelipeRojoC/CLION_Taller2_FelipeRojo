@@ -1,4 +1,4 @@
-ID,Nombre del Producto,Precio (CLP)
+ID,Nombre del Producto,Precio(CLP)
 1,Hamburguesa Clásica,6500
 2,Hamburguesa Doble,7500
 3,Hamburguesa BBQ,8000
