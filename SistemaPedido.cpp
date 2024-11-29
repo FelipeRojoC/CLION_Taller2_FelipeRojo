@@ -48,8 +48,11 @@ void SistemaPedido::entregarPedidos() {
 
 //Cancelar un pedido con su id
 void SistemaPedido::cancelarPedido(int id) {
-    if (avlPedidos.eliminarPedidoRecursivo(id)) { // AVL
-        heapPrioridad.cancelarPedido(id); // MinHeap
+    Pedido pedido = avlPedidos.buscarPedido(id);
+    if (pedido.getId() != -1) { //Si el pedido existe en el AVL
+        avlPedidos.eliminarPedidoRecursivo(id);//Eliminar del AVL
+        heapPrioridad.cancelarPedido(id); //Eliminar del MinHeap
+        pedidosCancelados.push_back(pedido); //Agregar al vector de pedidos cancelados
         std::cout << "El pedido ha sido cancelado con ID " << id << "\n";
     } else {
         std::cout << "No se encuentra el pedido con ID " << id << "\n";
@@ -87,9 +90,9 @@ void SistemaPedido::cerrarSistema() {
         return;
     }
 
-    archivo << "ID,Cliente,Productos,Valor Total,Hora\n"; // Encabezado
+    archivo << "ID,Cliente,Productos,Valor Total,Hora\n"; //Encabezado
 
-    for (const auto& pedido : historialPedidos) { // Historial de pedidos entregados
+    for (const auto& pedido : historialPedidos) { //Historial de pedidos entregados
         int valorTotal = 0;
 
         for (const auto& producto : pedido.getProductos()) {
@@ -115,7 +118,7 @@ void SistemaPedido::cerrarSistema() {
 
 //Menu principal
 void SistemaPedido::mostrarMenu() {
-    int opcion;
+    int opcion = 0;
     do {
         try {
             std::cout << "\n----- Sistema de pedidos Grill of Victory -----\n";
@@ -129,16 +132,9 @@ void SistemaPedido::mostrarMenu() {
             std::cout << "Seleccione una opcion ";
             std::cin >> opcion;
 
-            std::string entrada;
-            std::cin >> entrada;
-
-            //Convertir un numero la entrada
-            try {
-                opcion = std::stoi(entrada); //Convierte a un entero
-            } catch (const std::invalid_argument&) {
-                throw std::runtime_error("Entrada no valida, ingresa un numero ");
-            } catch (const std::out_of_range&) {
-                    throw std::runtime_error("Numero fuera del rango permitido ");
+            //Verificar si `std::cin` tiene un error
+            if (std::cin.fail()) {
+                throw std::runtime_error("Entrada invalida, ingrese un numero.");
             }
 
             if (opcion < 1 || opcion > 7) {
@@ -147,7 +143,7 @@ void SistemaPedido::mostrarMenu() {
 
             switch (opcion) {
                 case 1: {
-                    std::cin.ignore(); // Limpiar el buffer
+                    std::cin.ignore(); //Limpiar el buffer
                     std::string nombre, apellido;
                     std::list<std::string> productosSeleccionados;
                     int cantidad, opcionProducto;
@@ -173,7 +169,7 @@ void SistemaPedido::mostrarMenu() {
 
                         if (it != productosDisponibles.end()) {
                             productosSeleccionados.push_back(it->nombre);
-                            precioTotal += it->precio; // Sumar el precio al total
+                            precioTotal += it->precio; //Sumar el precio al total
                         } else {
                             std::cout << "Opcion inválida, ingrese denuevo\n";
                             --i;
@@ -212,7 +208,7 @@ void SistemaPedido::mostrarMenu() {
             }
         } catch (const std::exception& e) {
             std::cout << "ERROR " << e.what() << "\n";
-            std::cin.clear();              //Limpia el estado de error de `cin`
+            std::cin.clear(); //Limpia el estado de error de `cin`
             std::cin.ignore(INT_MAX, '\n'); //Descarta cualquier entrada no valida
         }
     } while (opcion != 5);
@@ -233,29 +229,20 @@ void SistemaPedido::mostrarEstadisticas() {
 
         switch (opcion) {
             case 1:
-                // TODO: Implementar logica para el pedido con mayor cantidad de productos
-                    std::cout << "Mostrando el pedido con mayor cantidad de productos...\n";
-            break;
-
+                pedidoMayorCantidadProductos();
+                break;
             case 2:
-                // TODO: Implementar logica para el pedido de mayor valor
-                    std::cout << "Mostrando el pedido de mayor valor...\n";
-            break;
-
+                pedidoMayorValor();
+                break;
             case 3:
-                // TODO: Implementar lógica para el pedido que más se tardó en ser entregado
-                    std::cout << "Mostrando el pedido que más se tardó en ser entregado...\n";
-            break;
-
+                pedidoMayorTiempoEntrega();
+                break;
             case 4:
-                // TODO: Implementar lógica para mostrar pedidos cancelados
-                    std::cout << "Mostrando todos los pedidos cancelados...\n";
-            break;
-
+                mostrarPedidosCancelados();
+                break;
             case 5:
                 std::cout << "Volviendo al menu principal \n";
-            break;
-
+                break;
             default:
                 std::cout << "Opcion no valida, ingrese nuevamente \n";
         }
@@ -274,37 +261,28 @@ void SistemaPedido::cargarProductos(const std::string& nombreArchivo) {
 
     while (std::getline(archivo, linea)) {
         if (esPrimeraLinea) {
-            esPrimeraLinea = false; // Omitir la primera línea (encabezado)
+            esPrimeraLinea = false; //Omitir la primera línea (encabezado)
             continue;
         }
 
         std::stringstream ss(linea);
         std::string idStr, nombre, precioStr;
 
-        // Dividir la línea por las comas
+        //Dividir la lknea por las comas
         std::getline(ss, idStr, ',');
         std::getline(ss, nombre, ',');
         std::getline(ss, precioStr, ',');
 
-        // Validar que los campos no estén vacíos
+        //Validar que los campos no estén vacios
         if (idStr.empty() || nombre.empty() || precioStr.empty()) {
             std::cerr << "Línea mal formateada: " << linea << "\n";
             continue;
         }
-
-        try {
-            Producto producto;
-            producto.id = std::stoi(idStr);   // Convertir ID a entero
-            producto.nombre = nombre;         // Almacenar nombre del producto
-            producto.precio = std::stoi(precioStr); // Convertir precio a entero
-            productosDisponibles.push_back(producto);
-        } catch (const std::invalid_argument& e) {
-            std::cerr << "Error al convertir ID o precio en la línea: " << linea << "\n";
-            continue;
-        } catch (const std::out_of_range& e) {
-            std::cerr << "Valor fuera de rango en la línea: " << linea << "\n";
-            continue;
-        }
+        Producto producto;
+        producto.id = std::stoi(idStr); //Convertir ID a entero
+        producto.nombre = nombre; //Almacenar nombre del producto
+        producto.precio = std::stoi(precioStr); //Convertir precio a entero
+        productosDisponibles.push_back(producto);
     }
 
     archivo.close();
@@ -336,3 +314,86 @@ void SistemaPedido::mostrarHistorialPedidos() const {
         std::cout << "-----------------------------\n";
     }
 }
+
+void SistemaPedido::pedidoMayorCantidadProductos() const {
+    if (historialPedidos.empty()) {
+        std::cout << "No hay pedidos entregados en el historial \n";
+        return;
+    }
+
+    const Pedido* pedidoMayor = nullptr;
+    for (const auto& pedido : historialPedidos) {
+        if (!pedidoMayor || pedido.getProductos().size() > pedidoMayor->getProductos().size()) {
+            pedidoMayor = &pedido;
+        }
+    }
+
+    if (pedidoMayor) {
+        std::cout << "Pedido con mayor cantidad de productos:\n";
+        std::cout << "ID: " << pedidoMayor->getId() << "\n";
+        std::cout << "Cliente: " << pedidoMayor->getNombreCliente() << " " << pedidoMayor->getApellidoCliente() << "\n";
+        std::cout << "Cantidad de productos: " << pedidoMayor->getProductos().size() << "\n";
+    }
+}
+
+void SistemaPedido::pedidoMayorValor() const {
+    if (historialPedidos.empty()) {
+        std::cout << "No hay pedidos entregados en el historial \n";
+        return;
+    }
+
+    const Pedido* pedidoMayor = nullptr;
+    int mayorValor = 0;
+
+    for (const auto& pedido : historialPedidos) {
+        int valorTotal = 0;
+        for (const auto& producto : pedido.getProductos()) {
+            auto it = std::find_if(productosDisponibles.begin(), productosDisponibles.end(),
+                [&producto](const Producto& prod) { return prod.nombre == producto; });
+            if (it != productosDisponibles.end()) {
+                valorTotal += it->precio;
+            }
+        }
+
+        if (valorTotal > mayorValor) {
+            mayorValor = valorTotal;
+            pedidoMayor = &pedido;
+        }
+    }
+
+    if (pedidoMayor) {
+        std::cout << "Pedido de mayor valor:\n";
+        std::cout << "ID: " << pedidoMayor->getId() << "\n";
+        std::cout << "Cliente: " << pedidoMayor->getNombreCliente() << " " << pedidoMayor->getApellidoCliente() << "\n";
+        std::cout << "Valor total: $" << mayorValor << "\n";
+    }
+}
+
+
+void SistemaPedido::pedidoMayorTiempoEntrega() const {
+    if (historialPedidos.empty()) {
+        std::cout << "No hay pedidos entregados en el historial.\n";
+        return;
+    }
+
+    const Pedido& ultimoPedido = historialPedidos.back();
+    std::cout << "Pedido que mas se tardo en ser entregado:\n";
+    std::cout << "ID: " << ultimoPedido.getId() << "\n";
+    std::cout << "Cliente: " << ultimoPedido.getNombreCliente() << " " << ultimoPedido.getApellidoCliente() << "\n";
+    std::cout << "Hora del pedido: " << ultimoPedido.getHoraPedido() << "\n";
+}
+
+void SistemaPedido::mostrarPedidosCancelados() const{
+    if (pedidosCancelados.empty()) {
+        std::cout << "No hay pedidos cancelados.\n";
+        return;
+    }
+
+    std::cout << "Pedidos cancelados:\n";
+    for (const auto& pedido : pedidosCancelados) {
+        std::cout << "ID: " << pedido.getId() << "\n";
+        std::cout << "Cliente: " << pedido.getNombreCliente() << " " << pedido.getApellidoCliente() << "\n";
+        std::cout << "-----------------------------\n";
+    }
+}
+

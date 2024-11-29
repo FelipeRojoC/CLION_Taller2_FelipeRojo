@@ -37,13 +37,21 @@ public:
     void mostrarProductos();
     void mostrarHistorialPedidos() const;
 
+    //Menu estadisticas requerimientos
+    void pedidoMayorCantidadProductos() const;
+    void pedidoMayorValor() const;
+    void pedidoMayorTiempoEntrega() const;
+    void mostrarPedidosCancelados() const;
+
+
     //Menu principal
     void mostrarMenu();
-    static void mostrarEstadisticas();
+    void mostrarEstadisticas();
 private:
 
     std::vector<Producto> productosDisponibles; // Productos disponibles de la lectura de archivos
     std::vector<Pedido> historialPedidos; // Historial de pedidos entregados
+    std::vector<Pedido> pedidosCancelados; // Almacena los pedidos cancelados
 
 };
 
