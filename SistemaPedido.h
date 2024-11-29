@@ -49,9 +49,9 @@ public:
     void mostrarEstadisticas();
 private:
 
-    std::vector<Producto> productosDisponibles; // Productos disponibles de la lectura de archivos
-    std::vector<Pedido> historialPedidos; // Historial de pedidos entregados
-    std::vector<Pedido> pedidosCancelados; // Almacena los pedidos cancelados
+    std::vector<Producto> productosDisponibles; //Productos disponibles de la lectura de archivos
+    std::vector<Pedido> historialPedidos; //Historial de pedidos entregados
+    std::vector<Pedido> pedidosCancelados; //Almacena los pedidos cancelados
 
 };
 
